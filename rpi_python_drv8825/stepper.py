@@ -1,7 +1,11 @@
 import Jetson.GPIO as GPIO
 from time import sleep
+import threading
 
 class StepperMotor:
+
+    running = False
+
     def __init__(self, enable_pin, step_pin, dir_pin, mode_pins, step_type, fullstep_delay):
         """docstring for ."""
         self.enable_pin = enable_pin
@@ -31,10 +35,16 @@ class StepperMotor:
     def enable(self, enable):
         GPIO.output(self.enable_pin, not enable)
 
+    def command(self, steps, clockwise):
+        thread = threading.Thread(target=self.run, args=(self, steps, clockwise))
+        thread.start()
+
     def run(self, steps, clockwise):
+        self.running = True
         GPIO.output(self.dir_pin, clockwise)
         for i in range(steps):
             GPIO.output(self.step_pin, GPIO.HIGH)
             sleep(self.delay)
             GPIO.output(self.step_pin, GPIO.LOW)
             sleep(self.delay)
+        self.running = False
