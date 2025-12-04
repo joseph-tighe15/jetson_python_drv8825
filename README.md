@@ -1,9 +1,9 @@
-# Raspberry Pi DRV8825 Python library 
-Python Library to controll a stepper motor with a DRV8825 driver connected to a Raspberry Pi
+# Jetson DRV8825 Python library 
+Python Library to controll a stepper motor with a DRV8825 driver connected to a jetson
 
 ### install
 ```
-$ pip install rpi_python_drv8825
+$ pip install jetson_python_drv8825
 ```
 or clone repository
 
@@ -12,7 +12,7 @@ or clone repository
 ###### 1. import library
 
 ```
-from rpi_python_drv8825.stepper import StepperMotor
+from jetson_python_drv8825.stepper import StepperMotor
 ```
 
 ###### 2. create object
